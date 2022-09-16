@@ -42,9 +42,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
  const [user, setUser] = useState<User | null>(null)
  const [initialLoding, setinitialLoding] = useState(true)
  const [error, setError] = useState(null)
- const router = useRouter()
+ const routers = useRouter()
 
-useEffect(()=>
+useEffect(
+    ()=>
     onAuthStateChanged(auth,(user)=>{
       
         if(user){
@@ -54,7 +55,7 @@ useEffect(()=>
         else{
             setUser(null)
             setisLoading(true)
-            router.push('/Login')
+            routers.push('/login')
         }
        
         setinitialLoding(false)
@@ -68,7 +69,7 @@ useEffect(()=>
 
     await createUserWithEmailAndPassword(auth,email,password).then((userCredential)=>
     {setUser(userCredential.user)
-        router.push("/")
+        routers.push('/')
         setisLoading(false)}).
     catch((error) => alert(error.message)).
     finally(() => setisLoading(false))
@@ -80,7 +81,7 @@ useEffect(()=>
 
     await signInWithEmailAndPassword(auth,email,password).then((userCredential)=>
     {setUser(userCredential.user)
-        router.push("/")
+        routers.push('/')
         setisLoading(false)}).
     catch((error) => alert(error.message)).
     finally(() => setisLoading(false))
