@@ -1,5 +1,3 @@
-import { sign } from 'crypto'
-import { signInAnonymously, signInWithPopup } from 'firebase/auth'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -13,16 +11,17 @@ interface Inputs{
 
 function login() {
   
-    const [Login, setLogin] = useState(false)
-    const{signUp,signIn,} = useAuth()
+    const [loginUser, setLogin] = useState(false)
+    const{ signUp, signIn} = useAuth()
     const {
         register,
         handleSubmit,
-        formState:{ errors },
-    } = useForm<Inputs>()
+        formState : { errors }, } = useForm<Inputs>()
     
-    const onSubmit: SubmitHandler<Inputs> = async ({email,password}) => {
-        Login ? await signIn(email,password) :await signUp(email,password)
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        loginUser ?
+        await signIn(data.email,data.password) :
+        await signUp(data.email,data.password)
     }
 
   return (
