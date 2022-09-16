@@ -54,7 +54,7 @@ useEffect(()=>
         else{
             setUser(null)
             setisLoading(true)
-            router.push('/login')
+            router.push('/Login')
         }
        
         setinitialLoding(false)
