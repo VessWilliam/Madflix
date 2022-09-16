@@ -21,7 +21,7 @@ function Banner({netflixOrigin} : Props){
 
     setmovie(netflixOrigin[Math.floor(Math.random() * netflixOrigin.length )])
 
-  }, [])
+  }, [netflixOrigin])
   
 
 
