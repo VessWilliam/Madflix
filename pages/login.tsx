@@ -52,8 +52,9 @@ function Login() {
                 <input 
                 type="email" 
                 placeholder="Email" 
-                className="input"
-                {...register("email", {required : true})} />
+                className={`input ${errors.email &&  'border-b-2 border-red-400'}`}
+                 {...register("email", {required : true})} />
+
                 {errors.email && (
                 <p className="p-1 text-[13px] font-light text-red-400">
                     Please Enter The Valid Email.
@@ -65,7 +66,7 @@ function Login() {
                  <input 
                  type="password" 
                  placeholder="Password" 
-                 className="input"
+                 className={`input ${errors.password && 'border-b-2 border-red-400'}`}
                  {...register("password",{required : true})}/>
                    {errors.password && (
                  <p className="p-1 text-[13px] font-light text-red-400">
@@ -76,8 +77,9 @@ function Login() {
           </div>
 
           <button
+          type="submit"
           onClick={()=>setLogin(true)} 
-          className="w-full rounded bg-[#e50914] py-3 font-semibold">
+          className="w-full rounded bg-[#E50914] py-3 font-semibold">
             Sign In
           </button> 
           
@@ -85,7 +87,8 @@ function Login() {
             New to Madflix ?{' '}
             <button
              onClick={()=>setLogin(false)}
-             type="submit" className="text-white hover:underline">
+             type="submit"
+             className="text-white cursor-pointer hover:underline">
                 Sign Up Now
             </button>
           </div>
