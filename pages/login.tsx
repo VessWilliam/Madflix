@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import UseAuth from '../hooks/useAuth'
 
@@ -9,19 +9,26 @@ interface Inputs{
     password:string
 }
 
-function Login() {
+
+export default function Login() {
   
     const [loginUser, setLogin] = useState(false)
     const{ signUp, signIn} = UseAuth()
     const {
-        register,
-        handleSubmit,
-        formState : { errors }, } = useForm<Inputs>()
-    
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<Inputs>()
+
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        loginUser ?
-        await signIn(data.email,data.password) :
-        await signUp(data.email,data.password)
+        if(loginUser)
+        {
+          await signIn(data.email,data.password) 
+        }
+        else{
+          await signUp(data.email,data.password)
+        }
     }
 
   return (
@@ -41,8 +48,7 @@ function Login() {
        Madflix
        </div>
 
-       <form
-       onSubmit={handleSubmit(onSubmit)} 
+       <form onSubmit={ handleSubmit(onSubmit) } 
        className="relative mt-24 space-y-8 rounded 
         bg-black/75 py-10 px-6 md:mt-0 md:max-w-md md:px-14 ">
           <h1 className="text-4xl font-semibold">Sign In</h1>
@@ -78,7 +84,7 @@ function Login() {
 
           <button
           type="submit"
-          onClick={()=>setLogin(true)} 
+          onClick={ ()=>setLogin(true) } 
           className="w-full rounded bg-[#E50914] py-3 font-semibold">
             Sign In
           </button> 
@@ -86,7 +92,7 @@ function Login() {
           <div className="text-gray-500">
             New to Madflix ?{' '}
             <button
-             onClick={()=>setLogin(false)}
+             onClick={ ()=>setLogin(false) }
              type="submit"
              className="text-white cursor-pointer hover:underline">
                 Sign Up Now
@@ -96,5 +102,3 @@ function Login() {
     </div>
   )
 }
-
-export default Login
