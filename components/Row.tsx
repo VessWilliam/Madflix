@@ -53,7 +53,6 @@ function Row({title,movies}: Props){
          hover:scale-125 group-hover:opacity-100`} 
         onClick={() => handleClick("right")}/>
 
-
      </div>
     </div>
   )

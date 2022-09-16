@@ -2,9 +2,11 @@ import {BellIcon, SearchIcon} from '@heroicons/react/solid';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Image from 'next/image'
+import useAuth from '../hooks/useAuth';
 
 function Header(){
    const [isScroll, setisScroll] = useState(false)
+   const{logout} = useAuth()
 
    useEffect(() => {
      const handleScroll =()=>{
@@ -36,7 +38,9 @@ function Header(){
        <BellIcon className="bellIconSize"/>
        <Link href="/account">
         <div className='relative space-x-2 flex items-center'>
-        <Image src='/fox.jpg' width={70} height={70} 
+        <Image
+        onClick={logout} 
+        src='/fox.jpg' width={70} height={70} 
         layout="fixed" className="rounded-full"  />      
         </div>
        </Link>

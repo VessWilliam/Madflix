@@ -5,6 +5,11 @@ import Header from '../components/Header'
 import requests from '../utils/request'
 import {Movie} from '../typing'
 import Row from '../components/Row'
+import useAuth from '../hooks/useAuth'
+import {useRecoilValue} from 'recoil'
+import { modalState } from '../atoms/modalAtom'
+import Modal from '../components/Modal'
+
 
 interface Prop {
   netflixOrigins : Movie[],
@@ -26,7 +31,14 @@ const Home = ({ netflixOrigins ,
                 horrorMovie,
                 romanceMovie,
                 documentaries,
-                latest }:Prop ) => {
+               }:Prop ) => {
+  const {isLoading} = useAuth()
+  const showModel = useRecoilValue(modalState)
+  
+  if(isLoading){
+    return "Loading"
+  }
+          
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
       <Head>
@@ -47,6 +59,7 @@ const Home = ({ netflixOrigins ,
         <Row title="Documentaries" movies={documentaries}/>
         </section>
        </main>
+       {showModel &&  <Modal/>}
     </div>
   )
 }
@@ -64,7 +77,6 @@ export const getServerSideProps = async () => {
     horrorMovie,
     romanceMovie,
     documentaries,
-    latest
   ] = await Promise.all([
     axios.get(requests.fetchNetflixOriginals).then((res)=> res.data),
     axios.get(requests.fetchTrending).then((res)=> res.data),
@@ -74,7 +86,6 @@ export const getServerSideProps = async () => {
     axios.get(requests.fetchHorrorMovies).then((res)=> res.data),
     axios.get(requests.fetchRomanceMovies).then((res)=> res.data),
     axios.get(requests.fetchDocumentaries).then((res)=> res.data),
-    axios.get(requests.fetchLastest).then((res)=> res.data),
   ])
   return{
     props:{
@@ -86,7 +97,6 @@ export const getServerSideProps = async () => {
       horrorMovie: horrorMovie.results,
       romanceMovie: romanceMovie.results,
       documentaries: documentaries.results,
-      latest: latest.results ?? null ,
     }
   }
 }
