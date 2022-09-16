@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import useAuth from '../hooks/useAuth'
+import UseAuth from '../hooks/useAuth'
 
 interface Inputs{
     email:string
@@ -12,7 +12,7 @@ interface Inputs{
 function Login() {
   
     const [loginUser, setLogin] = useState(false)
-    const{ signUp, signIn} = useAuth()
+    const{ signUp, signIn} = UseAuth()
     const {
         register,
         handleSubmit,
