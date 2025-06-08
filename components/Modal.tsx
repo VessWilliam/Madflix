@@ -4,7 +4,7 @@ import {useRecoilState} from 'recoil'
 import {modalState, movieState} from '../atoms/modalAtom'
 import {useState , useEffect} from 'react'
 import axios from 'axios'
-import {Element,Genre} from '../typing'
+import {Element,Genre} from '../types/typing'
 import ReactPlayer from 'react-player/lazy'
 import { FaPlay } from 'react-icons/fa'
 
