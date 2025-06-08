@@ -1,5 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# If using Yarn
+package-lock.json
+
+# If using npm
+yarn.lock
+
 # dependencies
 /node_modules
 /.pnp
@@ -27,6 +33,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
